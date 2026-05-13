@@ -1,147 +1,199 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login EcoPneu</title>
-  
+  <title>EcoPneu Login</title>
 
   <style>
 
     *{
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: Arial, Helvetica, sans-serif;
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:Arial;
     }
 
     body{
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: linear-gradient(135deg, #1e7d32, #43a047);
+      height:100vh;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+
+      background-image:url("ifpi.png");
+      background-size:cover;
+      background-position:center;
     }
 
-    .login-box{
-      background: white;
-      padding: 40px;
-      width: 350px;
-      border-radius: 15px;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+    .box{
+      background:white;
+      width:350px;
+      padding:40px;
+      border-radius:15px;
+      box-shadow:0 5px 20px rgba(0,0,0,0.3);
     }
 
-    .login-box h1{
-      text-align: center;
-      margin-bottom: 25px;
-      color: #1e7d32;
+    h1{
+      text-align:center;
+      margin-bottom:25px;
+      color:#1e7d32;
     }
 
-    .input-group{
-      margin-bottom: 20px;
-    }
-
-    .input-group label{
-      display: block;
-      margin-bottom: 6px;
-      font-weight: bold;
-    }
-
-    .input-group input{
-      width: 100%;
-      padding: 12px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      outline: none;
-    }
-
-    .input-group input:focus{
-      border-color: #1e7d32;
+    input{
+      width:100%;
+      padding:12px;
+      margin-bottom:15px;
+      border-radius:8px;
+      border:1px solid #ccc;
     }
 
     button{
-      width: 100%;
-      padding: 12px;
-      border: none;
-      border-radius: 8px;
-      background: #1e7d32;
-      color: white;
-      font-size: 16px;
-      cursor: pointer;
-      transition: 0.3s;
+      width:100%;
+      padding:12px;
+      border:none;
+      border-radius:8px;
+      background:#1e7d32;
+      color:white;
+      cursor:pointer;
+      font-size:16px;
     }
 
     button:hover{
-      background: #166628;
+      background:#166628;
+    }
+
+    p{
+      text-align:center;
+      margin-top:15px;
+    }
+
+    a{
+      color:#1e7d32;
+      cursor:pointer;
     }
 
     .mensagem{
-      text-align: center;
-      margin-top: 15px;
-      color: red;
+      color:red;
+      margin-top:10px;
     }
-    body{
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  background-image: url("ifpi.png");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-}
 
   </style>
 </head>
 
 <body>
 
-  <div class="login-box">
+<div class="box">
 
-    <h1>EcoPneu Login</h1>
+  <h1 id="titulo">Login</h1>
 
-    <div class="input-group">
-      <label>Email</label>
-      <input type="email" id="email" placeholder="Digite seu email">
-    </div>
+  <input type="email" id="email" placeholder="Digite seu email">
 
-    <div class="input-group">
-      <label>Senha</label>
-      <input type="password" id="senha" placeholder="Digite sua senha">
-    </div>
+  <input type="password" id="senha" placeholder="Digite sua senha">
 
-    <button onclick="fazerLogin()">
-      Entrar
-    </button>
+  <button onclick="acao()" id="botao">
+    Entrar
+  </button>
 
-    <p class="mensagem" id="mensagem"></p>
+  <p id="trocaTexto">
+    Não possui conta?
+    <a onclick="trocarTela()">Criar conta</a>
+  </p>
 
-  </div>
+  <p class="mensagem" id="mensagem"></p>
 
-  <script>
+</div>
 
-    function fazerLogin(){
+<script>
 
-      const email = document.getElementById("email").value;
-      const senha = document.getElementById("senha").value;
+let telaCadastro = false;
 
-      if(email === "ifpi123@gmail.com" && senha === "1234"){
+function trocarTela(){
 
-        alert("Login realizado com sucesso!");
+  telaCadastro = !telaCadastro;
 
-        window.open("compra.html");
+  const titulo = document.getElementById("titulo");
+  const botao = document.getElementById("botao");
+  const trocaTexto = document.getElementById("trocaTexto");
+  const mensagem = document.getElementById("mensagem");
 
-      }else{
+  mensagem.innerText = "";
 
-        document.getElementById("mensagem").innerText =
-        "Email ou senha incorretos";
+  if(telaCadastro){
 
-      }
+    titulo.innerText = "Cadastro";
+    botao.innerText = "Cadastrar";
 
-    }
+    trocaTexto.innerHTML =
+    'Já possui conta? <a onclick="trocarTela()">Fazer login</a>';
 
-  </script>
+  }else{
+
+    titulo.innerText = "Login";
+    botao.innerText = "Entrar";
+
+    trocaTexto.innerHTML =
+    'Não possui conta? <a onclick="trocarTela()">Criar conta</a>';
+
+  }
+
+}
+
+function acao(){
+
+  if(telaCadastro){
+
+    cadastrar();
+
+  }else{
+
+    fazerLogin();
+
+  }
+
+}
+
+function cadastrar(){
+
+  const email = document.getElementById("email").value;
+  const senha = document.getElementById("senha").value;
+
+  localStorage.setItem("email", email);
+  localStorage.setItem("senha", senha);
+
+  document.getElementById("mensagem").style.color = "green";
+
+  document.getElementById("mensagem").innerText =
+  "Conta criada com sucesso!";
+
+}
+
+function fazerLogin(){
+
+  const email = document.getElementById("email").value;
+  const senha = document.getElementById("senha").value;
+
+  const emailSalvo = localStorage.getItem("email");
+  const senhaSalva = localStorage.getItem("senha");
+
+  if(email === emailSalvo && senha === senhaSalva){
+
+    alert("Login realizado!");
+
+    window.location.href = "compra.html";
+
+  }else{
+
+    document.getElementById("mensagem").style.color = "red";
+
+    document.getElementById("mensagem").innerText =
+    "Email ou senha incorretos";
+
+  }
+
+}
+
+</script>
 
 </body>
 </html>
