@@ -35,34 +35,67 @@ function carregarPneus() {
 }
 
 function cadastrarPneu() {
-  const vendedor = document.getElementById("vendedor").value;
-  const contato = document.getElementById("contato").value;
-  const local = document.getElementById("local").value;
-  const medida = document.getElementById("medida").value;
-  const qualidade = document.getElementById("qualidade").value;
-  const tipo = document.getElementById("tipo").value;
-  const preco = document.getElementById("preco").value;
-  const descricao = document.getElementById("descricao").value;
 
-  const novoPneu = {
-    titulo: medida,
-    qualidade: qualidade,
-    tipo: tipo,
-    uso: descricao,
-    preco: preco,
-    vendedor: vendedor,
-    contato: contato,
-    local: local,
-    imagem: "https://images.unsplash.com/photo-1607860108855-64acf2078ed9"
+  const vendedor =
+  document.getElementById("vendedor").value;
+
+  const contato =
+  document.getElementById("contato").value;
+
+  const local =
+  document.getElementById("local").value;
+
+  const medida =
+  document.getElementById("medida").value;
+
+  const qualidade =
+  document.getElementById("qualidade").value;
+
+  const tipo =
+  document.getElementById("tipo").value;
+
+  const preco =
+  document.getElementById("preco").value;
+
+  const descricao =
+  document.getElementById("descricao").value;
+
+  const arquivo =
+  document.getElementById("imagem").files[0];
+
+  const leitor = new FileReader();
+
+  leitor.onload = function(e){
+
+    const novoPneu = {
+
+      titulo: medida,
+      qualidade: qualidade,
+      tipo: tipo,
+      uso: descricao,
+      preco: preco,
+      vendedor: vendedor,
+      contato: contato,
+      local: local,
+
+      imagem: e.target.result
+
+    };
+
+    pneus.push(novoPneu);
+
+    salvarBanco();
+
+    carregarPneus();
+
+    document.getElementById("formVenda").reset();
+
+    alert("Pneu cadastrado com sucesso!");
+
   };
 
-  pneus.push(novoPneu);
-  salvarBanco();
-  carregarPneus();
+  leitor.readAsDataURL(arquivo);
 
-  document.getElementById("formVenda").reset();
-
-  alert("Pneu cadastrado com sucesso!");
 }
 
 function filtrar() {
@@ -83,3 +116,22 @@ function filtrar() {
 }
 
 carregarPneus();
+const input =
+document.getElementById("imagem");
+
+input.addEventListener("change", function(){
+
+  const arquivo = this.files[0];
+
+  const leitor = new FileReader();
+
+  leitor.onload = function(e){
+
+    document.getElementById("preview").src =
+    e.target.result;
+
+  }
+
+  leitor.readAsDataURL(arquivo);
+
+});
