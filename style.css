@@ -311,3 +311,53 @@ footer {
   justify-content:center;
 
 }
+.container-vender{
+
+  display:flex;
+
+  justify-content:center;
+
+  margin-top:20px;
+
+}
+
+.caixa-vender{
+
+  background:#1e7d32;
+
+  color:white;
+
+  padding:8px 15px;
+
+  border-radius:8px;
+
+  font-size:14px;
+
+}
+.grupo-nomes{
+
+  display:flex;
+
+  justify-content:center;
+
+  gap:10px;
+
+  flex-wrap:wrap;
+
+  margin-top:20px;
+
+}
+
+.caixa-nome{
+
+  background:#1e7d32;
+
+  color:white;
+
+  padding:8px 15px;
+
+  border-radius:10px;
+
+  font-size:14px;
+
+}

@@ -7,7 +7,7 @@ let pneus = JSON.parse(localStorage.getItem("pneus")) || [
     preco: "R$ 80,00",
     vendedor: "Borracharia Central",
     contato: "(89) 99999-0001",
-    imagem: "https://images.unsplash.com/photo-1607860108855-64acf2078ed9"
+    imagem: "https://images.unsplash.chttps://media.istockphoto.com/id/159112459/pt/foto/pneu-de-autom%C3%B3vel-3-d-%C3%ADcone-isolado.webp?s=2048x2048&w=is&k=20&c=QHZYARcktg1vq3vuW-lcGXlhUM4AIeTqfqJ2E_JyP_o=om/photo-1607860108855-64acf2078ed9"
   }
 ];
 
